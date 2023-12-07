@@ -32,6 +32,15 @@ public class HomeController {
 		List<AcademyVO> academyList = academyService.getAcademyTree();
 		return academyList;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	/*
 	 * @RequestMapping(value = "/createTree.do", method = RequestMethod.POST) public

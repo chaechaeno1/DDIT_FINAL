@@ -83,8 +83,14 @@ $(function() {
 			error : function(xhr, status, error) {
 				console.error('AJAX 오류:', status, error);
 			}
-		}); //jstree 끝
-	}
+		}); 
+	} //treelist 끝
+	
+	
+	function treelist() {}
+	
+	
+	
 	
 	
 	// Grid 틀 생성
