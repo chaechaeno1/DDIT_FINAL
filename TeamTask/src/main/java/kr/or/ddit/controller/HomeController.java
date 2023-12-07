@@ -28,10 +28,14 @@ public class HomeController {
 
 	@ResponseBody
 	@RequestMapping(value = "/treelist.do", method = RequestMethod.POST)
-	public List<AcademyVO> jqAcademyTree(AcademyVO academyVO) {
+	public List<AcademyVO> jqAcademyTree(AcademyVO academyVO, Model model) {
 		List<AcademyVO> academyList = academyService.getAcademyTree();
 		return academyList;
 	}
 
-
+	/*
+	 * @RequestMapping(value = "/createTree.do", method = RequestMethod.POST) public
+	 * ResponseEntity<AcademyVO> createTree(@RequestBody AcademyVO academyVO, Model
+	 * model) { academyService.create(academyVO); return "redirect:/"; }
+	 */
 }
