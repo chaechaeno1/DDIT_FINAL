@@ -28,7 +28,7 @@ public class HomeController {
 
 	@ResponseBody
 	@RequestMapping(value = "/treelist.do", method = RequestMethod.POST)
-	public List<AcademyVO> jqAcademyTree(AcademyVO academyVO, Model model) {
+	public List<AcademyVO> jqAcademyTree(AcademyVO academyVO) {
 		List<AcademyVO> academyList = academyService.getAcademyTree();
 		return academyList;
 	}
