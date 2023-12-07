@@ -33,6 +33,12 @@ public class HomeController {
 		return academyList;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/treecreate.do", method = RequestMethod.POST)
+	public List<AcademyVO> jqAcademyTreeCreate(AcademyVO academyVO, Model model) {
+		List<AcademyVO> academyList = academyService.getAcademyTree();
+		return academyList;
+	}
 	
 	
 	
