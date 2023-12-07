@@ -26,27 +26,21 @@ public class GridController {
 	@Inject
 	private IGridService gridService;
 	
-	//하드코딩 -> 출력잘됨
-	@RequestMapping(value = "/grid01", method = RequestMethod.GET)
-	public String grid01(){				
-		return "grid";
-	}
-	
-	//조회
-	@RequestMapping(value = "/grid02", method=RequestMethod.GET)
-	public String grid02(Model model) {
+	// 리스트 가져오기
+	@ResponseBody
+	@RequestMapping(value = "/getGridData", method=RequestMethod.POST)
+	public ResponseEntity<List<Student>> getGridData(@RequestBody String id) {
 		
 		List<Student> studentList = gridService.list();
-		model.addAttribute("studentList", studentList);
-		
-		return "grid2";
+		System.out.println(studentList);
+		return new ResponseEntity<List<Student>>(studentList, HttpStatus.OK);
 	}
 	
 	
 	// 3) 객체 타입의 JSON 요청 데이터 @RequestBody 어노테이션을 지정하여 자바빈즈 매개변수로 처리한다.
-		// 비동기 처리 진행시, 객체 매개변수 -> 요청 본문안에 데이터 바인딩을 위한 @RequestBody를 필수로 붙여줘야함
+	// 비동기 처리 진행시, 객체 매개변수 -> 요청 본문안에 데이터 바인딩을 위한 @RequestBody를 필수로 붙여줘야함
 	@ResponseBody
-	@RequestMapping(value = "/grid03", method = RequestMethod.POST)
+	@RequestMapping(value = "/gridUpdate", method = RequestMethod.POST)
 	public ResponseEntity<String> grid02Update(@RequestBody Map<String, String> param) {
 	    log.info("grid02Update() 실행...!");
 	    int stId = Integer.parseInt(param.get("stId"));

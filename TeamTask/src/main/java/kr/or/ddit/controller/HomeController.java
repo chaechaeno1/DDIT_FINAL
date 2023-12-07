@@ -33,9 +33,5 @@ public class HomeController {
 		return academyList;
 	}
 
-	/*
-	 * @RequestMapping(value = "/createTree.do", method = RequestMethod.POST) public
-	 * ResponseEntity<AcademyVO> createTree(@RequestBody AcademyVO academyVO, Model
-	 * model) { academyService.create(academyVO); return "redirect:/"; }
-	 */
+
 }
