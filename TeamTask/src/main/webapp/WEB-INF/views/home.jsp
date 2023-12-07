@@ -25,7 +25,7 @@ $(function() {
 	treelist();
 
 	
-	
+	//트리 리스트 출력
 	function treelist() {
 		//트리 데이터 가져오기
 		$.ajax({
@@ -73,6 +73,7 @@ $(function() {
 					
 					getGridData(1);
 				}).bind('create_node.jstree', function(event, data) {
+					
 					console.log("노드 생성 데이터 : ", data);
 				}).bind('rename_node.jstree', function(event, data) {
 					console.log("노드 변경 데이터 : ", data);
@@ -83,11 +84,82 @@ $(function() {
 			error : function(xhr, status, error) {
 				console.error('AJAX 오류:', status, error);
 			}
-		}); 
+		}); //ajax 끝
 	} //treelist 끝
 	
 	
-	function treelist() {}
+	//트리 생성
+	function treecreate() {
+		
+		$.ajax({
+			type : 'post',
+			url : '/treelist.do',
+			dataType : 'json',
+			success : function(data) {
+				console.log(data);
+				var academy = new Array();
+				// 데이터 받아옴
+				$.each(data, function(idx, item) {
+					academy[idx] = {
+						id : item.id,
+						parent : item.parentId,
+						text : item.name
+					};
+				});
+				// 트리 생성
+				$('#jstree').jstree({
+					core : {
+						data : academy,
+						check_callback : true
+					},
+					types : {
+						'default' : {
+							'icon' : 'jstree-folder'
+						}
+					},
+					plugins : [ 'contextmenu' ]
+				}).bind('loaded.jstree', function(event, data) {
+					// 트리 로딩 완료 이벤트
+				}).bind('select_node.jstree', function(event, data) {
+					// 노드 선택 이벤트
+					console.log("Selected Node:", data.node);
+					console.log("Selected data:", data);
+					console.log("이름 : ", data.node.text);
+
+					// Toast UI Grid 생성 및 표시
+					// grid 틀 생성
+					createGrid();
+					
+					var clickData = {
+						id: 1
+					}
+					
+					getGridData(1);
+				}).bind('create_node.jstree', function(event, data) {
+					
+					console.log("노드 생성 데이터 : ", data);
+				}).bind('rename_node.jstree', function(event, data) {
+					console.log("노드 변경 데이터 : ", data);
+				}).bind('delete_node.jstree', function(event, data) {
+					console.log("노드 삭제 데이터 : ", data);
+				});
+			},
+			error : function(xhr, status, error) {
+				console.error('AJAX 오류:', status, error);
+			}
+		}); //ajax 끝
+				
+	}
+	
+	//트리 수정
+	function treerename() {
+		
+	}
+	
+	//트리 삭제
+	function treedelete() {
+		
+	}
 	
 	
 	
