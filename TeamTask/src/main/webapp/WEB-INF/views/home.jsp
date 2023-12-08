@@ -55,8 +55,10 @@ $(function() {
 						}
 					},
 					plugins : [ 'contextmenu' ]
-				}).bind('loaded.jstree', function(event, data) {
+				
+				
 					// 트리 로딩 완료 이벤트
+					
 				}).bind('select_node.jstree', function(event, data) {
 					// 노드 선택 이벤트
 					console.log("Selected Node:", data.node);
@@ -72,18 +74,20 @@ $(function() {
 					}
 					
 					getGridData(1);
+				}).bind('rename_node.jstree', function(event, data) {
+					console.log("노드 변경 데이터 : ", data);
+					treerename(data); // 메소드 호출
 				}).bind('create_node.jstree', function(event, data) {
 					// create 클릭 시 폴더 이름 설정
 					// 기존에 'New Node'로 출력되었던 부분임
 					//data.node.text = '폴더명을 입력하세요';
 					console.log("노드 생성 데이터 : ", data);
 					treecreate(data); // 메소드 호출
-				}).bind('rename_node.jstree', function(event, data) {
-					console.log("노드 변경 데이터 : ", data);
-					treerename(data); // 메소드 호출
 				}).bind('delete_node.jstree', function(event, data) {
 					console.log("노드 삭제 데이터 : ", data);
 					 treedelete(data); // 메소드 호출
+				}).bind("refresh.jstree", function(event, data) {	 
+				}).bind('loaded.jstree', function(event, data) {
 				});
 			}, // success 끝
 			error : function(xhr, status, error) {
@@ -119,7 +123,7 @@ $(function() {
  		
 		var id = data.node.parent + data.node.id;
 		var parentId = data.node.parent;
-		var text = data.node.text;
+		var text = data.node.text; //New Node
 		
 		console.log(id);
 		console.log(parentId);
@@ -142,7 +146,7 @@ $(function() {
 	            data: JSON.stringify(data),
 	            //datatype : 'json',
 	            success: function (response) {	               
-	                treelist();
+	                //treelist();
 	            },
 	            error: function (xhr, status, error) {
 	                console.error('AJAX 오류:', status, error);
@@ -155,7 +159,12 @@ $(function() {
 	function treerename(data) {
 		var id = data.node.id;
 		var parentId = data.node.parent;
-		var text = data.text;
+		var text = data.node.text;
+		
+		console.log(id);
+		console.log(parentId);
+		console.log(text); // 바뀐이름 나옴
+		
 			
 		var ids = {
 			//아이디
@@ -173,11 +182,13 @@ $(function() {
 	            url: '/treerename.do',
 	            data: JSON.stringify(ids),
 	            contentType: 'application/json',
-	            datatype : 'json',
+	            dataType : 'json',
 	            success: function (data) {
-	            	//data.node.old.text('');
+	            	console.log(ids);
+	            	//data.node.text = text;
+	            	//data.node.original.text(text);
 	                //text = data.node.text;	        
-	                treelist();
+	               // treelist();
 	            },
 	            error: function (xhr, status, error) {
 	                console.error('AJAX 오류:', status, error);
