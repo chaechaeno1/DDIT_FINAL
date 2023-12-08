@@ -46,14 +46,14 @@ public class HomeController {
 	}
 	
 
-	//아이디 갯수
-	@ResponseBody
-	@RequestMapping(value = "/countId.do", method=RequestMethod.GET)
-	public String countId(@RequestBody AcademyVO academyVO) {
-		log.info("countId() 실행...!");
-		String countId = academyService.countId(academyVO);
-		return countId;		
-	}
+//	//아이디 갯수
+//	@ResponseBody
+//	@RequestMapping(value = "/countId.do", method=RequestMethod.GET)
+//	public String countId(@RequestBody AcademyVO academyVO) {
+//		log.info("countId() 실행...!");
+//		String countId = academyService.countId(academyVO);
+//		return countId;		
+//	}
 	
 
 	

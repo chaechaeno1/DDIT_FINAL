@@ -75,7 +75,7 @@ $(function() {
 				}).bind('create_node.jstree', function(event, data) {
 					// create 클릭 시 폴더 이름 설정
 					// 기존에 'New Node'로 출력되었던 부분임
-					data.node.text = '폴더명을 입력하세요';
+					//data.node.text = '폴더명을 입력하세요';
 					console.log("노드 생성 데이터 : ", data);
 					treecreate(data); // 메소드 호출
 				}).bind('rename_node.jstree', function(event, data) {
@@ -85,7 +85,7 @@ $(function() {
 					console.log("노드 삭제 데이터 : ", data);
 					 treedelete(data); // 메소드 호출
 				});
-			},
+			}, // success 끝
 			error : function(xhr, status, error) {
 				console.error('AJAX 오류:', status, error);
 			}
@@ -94,18 +94,8 @@ $(function() {
 	
 	
 	//아이디 개수.....
-	function countId(data) {
-
-		var data = 
-			{
-				//아이디
-				id : id,
-				//부모 아이디
-				parentId : parentId,
-				//트리 이름
-				name : text
-			};
-            
+/* 	function countId() {
+           
 	        $.ajax({
 	            type: 'post',
 	            url: '/countId.do',
@@ -118,14 +108,14 @@ $(function() {
 	                console.error('AJAX 오류:', status, error);
 	            }
 	        });
-	}  
+	}   */
 	
 	
 		
  	//트리 생성
 	function treecreate(data) {
  		
-		countId(data);		
+		//countId();		
  		
 		var id = data.node.parent + data.node.id;
 		var parentId = data.node.parent;
@@ -134,9 +124,6 @@ $(function() {
 		console.log(id);
 		console.log(parentId);
 		console.log(text);
-		
-
-		
 		
 		var data = 
 			{
@@ -151,8 +138,9 @@ $(function() {
 	        $.ajax({
 	            type: 'post',
 	            url: '/treecreate.do',
+	            contentType: 'application/json',
 	            data: JSON.stringify(data),
-	            datatype : 'json',
+	            //datatype : 'json',
 	            success: function (response) {	               
 	                treelist();
 	            },
@@ -187,6 +175,8 @@ $(function() {
 	            contentType: 'application/json',
 	            datatype : 'json',
 	            success: function (data) {
+	            	//data.node.old.text('');
+	                //text = data.node.text;	        
 	                treelist();
 	            },
 	            error: function (xhr, status, error) {
