@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.mapper.IAcademyMapper">
+
+	<select id="getAcademyTree" resultType="academyVO">
+		select id, name, parent_id
+		from academy
+		order by id
+	</select>
+	
+	<select id="countId" resultType="academyVO">
+		select count(id) from academy
+		where parent_id = #{parentId};
+	</select>
+	
+			
+ 	<insert id="createAcademyTree" parameterType="academyVO">
+		insert into academy(id, name, parent_id)
+		values( 
+			#{id}, #{name}, #{parentId}
+		)
+	</insert>  
+	
+	
+	<update id="updateAcademyTree" parameterType="academyVO">
+		update academy 
+		set name = #{name}
+		where id = #{id} 
+		and parent_id = #{parentId}		
+	</update> 
+	
+ 	<delete id="deleteAcademyTree" parameterType="academyVO">
+		delete from academy
+		where id = #{id}
+		and parent_id = #{parentId}	
+	</delete> 
+	
+	
+	
+</mapper>
