@@ -10,9 +10,11 @@
 		order by id
 	</select>
 	
-	<select id="countId" resultType="academyVO">
+	
+	<!-- 아이디 개수 구하기 -->
+	<select id="countId" resultType="int">
 		select count(id) from academy
-		where parent_id = #{parentId};
+		where parent_id = #{parentId}
 	</select>
 	
 			
@@ -31,12 +33,18 @@
 		and parent_id = #{parentId}		
 	</update> 
 	
- 	<delete id="deleteAcademyTree" parameterType="academyVO">
-		delete from academy
+	
+	
+	<delete id="deleteAcademyTree" parameterType="string">
+		delete from academy 
 		where id = #{id}
-		and parent_id = #{parentId}	
-	</delete> 
+	</delete>
 	
 	
+	<select id="findChild" parameterType="string" resultType="academyVO">
+		select id, name, parent_id
+		from academy 
+		where parent_id = #{id}
+	</select>
 	
 </mapper>

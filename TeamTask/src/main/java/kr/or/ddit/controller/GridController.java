@@ -26,7 +26,7 @@ public class GridController {
 	@Inject
 	private IGridService gridService;
 	
-	// 리스트 가져오기
+	// 전체 리스트 가져오기
 	@ResponseBody
 	@RequestMapping(value = "/getGridData", method=RequestMethod.POST)
 	public ResponseEntity<List<Student>> getGridData(@RequestBody String id) {
@@ -35,6 +35,31 @@ public class GridController {
 		System.out.println(studentList);
 		return new ResponseEntity<List<Student>>(studentList, HttpStatus.OK);
 	}
+	
+	// 일치하는 팀 리스트 가져오기
+	@ResponseBody
+	@RequestMapping(value = "/getTeamGrid", method = RequestMethod.POST)
+	public ResponseEntity<List<Student>> getTeamGrid(@RequestBody Map<String, Object> param) {
+	    String team = (String) param.get("team");
+
+	    List<Student> teamList = gridService.teamList(team);
+	    System.out.println(teamList);
+	    return new ResponseEntity<List<Student>>(teamList, HttpStatus.OK);
+	}
+	
+	
+	// 일치하는 클래스 리스트 가져오기
+	@ResponseBody
+	@RequestMapping(value = "/getClassesGrid", method = RequestMethod.POST)
+	public ResponseEntity<List<Student>> getClassesGrid(@RequestBody Map<String, Object> param) {
+		String classes = (String) param.get("classes");
+		
+		List<Student> classesList = gridService.classesList(classes);
+		System.out.println(classesList);
+		return new ResponseEntity<List<Student>>(classesList, HttpStatus.OK);
+	}
+	
+	
 	
 	
 	// 3) 객체 타입의 JSON 요청 데이터 @RequestBody 어노테이션을 지정하여 자바빈즈 매개변수로 처리한다.

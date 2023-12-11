@@ -4,10 +4,29 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.ddit.mapper.IGridMapper">
 
+	<!-- 전체 리스트 -->
 	<select id="list" resultType="std">
 		select
-			st_id, st_name, tel, majortype, certificate, grade
+			st_id, st_name, tel, majortype, certificate, grade, classes, team
 		from student
+		order by st_id
+	</select>
+
+	<!-- 팀 리스트 -->
+	<select id="teamList" parameterType="string" resultType="std">
+		select 
+			st_id, st_name, tel, majortype, certificate, grade, classes, team
+		from student
+		where team = #{team}
+		order by st_id
+	</select>
+	
+	<!-- 클래스 리스트 -->
+	<select id="classesList" parameterType="string" resultType="std">
+		select 
+			st_id, st_name, tel, majortype, certificate, grade, classes, team
+		from student
+		where classes = #{classes}
 		order by st_id
 	</select>
 
@@ -17,7 +36,7 @@
 			set tel = #{tel}
 			where st_id = #{stId}
 		</if>
-		<if test="majorType != null">
+		<if test="majorType !=  null">
 			update student
 			set majortype = #{majorType}
 			where st_id = #{stId}
@@ -33,6 +52,8 @@
 			where st_id = #{stId}
 		</if>
 	</update>
+	
+	
 
 </mapper>
 

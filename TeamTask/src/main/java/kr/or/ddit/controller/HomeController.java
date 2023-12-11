@@ -46,14 +46,13 @@ public class HomeController {
 	}
 	
 
-//	//아이디 갯수
-//	@ResponseBody
-//	@RequestMapping(value = "/countId.do", method=RequestMethod.GET)
-//	public String countId(@RequestBody AcademyVO academyVO) {
-//		log.info("countId() 실행...!");
-//		String countId = academyService.countId(academyVO);
-//		return countId;		
-//	}
+	//아이디 갯수
+	@ResponseBody
+	@RequestMapping(value = "/countId.do", method=RequestMethod.POST)
+	public int countId(@RequestBody AcademyVO academyVO) {
+		log.info("countId() 실행...!");
+		return academyService.countId(academyVO);	
+	}
 	
 
 	
@@ -71,7 +70,13 @@ public class HomeController {
 	@RequestMapping(value = "/treedelete.do", method = RequestMethod.POST)
 	public AcademyVO jqAcademyTreeRemove(@RequestBody AcademyVO academyVO) {
 		log.info("jqAcademyTreeRemove() 실행...!");
-		academyService.removeAcademyTree(academyVO);
+		
+		// id값 받아오기
+		String id = academyVO.getId();
+		
+
+		academyService.removeAcademyTree(id);
+
 		return academyVO;
 	}
 

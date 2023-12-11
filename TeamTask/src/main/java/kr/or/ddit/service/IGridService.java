@@ -8,5 +8,7 @@ public interface IGridService {
 
 	public List<Student> list();
 	public int update(Student student);
+	public List<Student> teamList(String team);
+	public List<Student> classesList(String classes);
 
 }

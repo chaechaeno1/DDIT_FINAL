@@ -26,4 +26,14 @@ public class GridServiceImpl implements IGridService {
 		return mapper.update(student);
 	}
 
+	@Override
+	public List<Student> teamList(String team) {
+		return mapper.teamList(team);
+	}
+
+	@Override
+	public List<Student> classesList(String classes) {
+		return mapper.classesList(classes);
+	}
+
 }

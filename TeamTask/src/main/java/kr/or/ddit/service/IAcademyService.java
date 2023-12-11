@@ -10,11 +10,13 @@ public interface IAcademyService {
 
 	public void renameAcademyTree(AcademyVO academyVO);
 
-	public void removeAcademyTree(AcademyVO academyVO);
 
 	public void createAcademyTree(AcademyVO academyVO);
 
-	public String countId(AcademyVO academyVO);
+	public int countId(AcademyVO academyVO);
 
+	public void removeAcademyTree(String id);
+
+	public void removeAcademyTreeChild(List<AcademyVO> childList);
 
 }

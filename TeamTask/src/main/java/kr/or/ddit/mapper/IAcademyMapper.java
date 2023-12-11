@@ -10,11 +10,12 @@ public interface IAcademyMapper {
 
 	public void updateAcademyTree(AcademyVO academyVO);
 
-	public void deleteAcademyTree(AcademyVO academyVO);
-
 	public void createAcademyTree(AcademyVO academyVO);
 
-	public String countId(AcademyVO academyVO);
+	public int countId(AcademyVO academyVO);
 
+	public List<AcademyVO> findChild(String id);
+
+	public void deleteAcademyTree(String id);
 
 }
